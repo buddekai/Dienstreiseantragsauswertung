@@ -1,15 +1,13 @@
-# Skript zum automatisierten Einlesen von Dienstreiseabrechnungen ++++++++++
+# Skript zum automatisierten Einlesen von Dienstreiseanträgen ++++++++++++++
 # Author: Kai Budde
 # Created: 2021/02/17
-# Last changed: 2021/02/23
-# Version: 0.1.0
+# Last changed: 2021/04/21
+# Version: 0.1.1
 
 # User-defined parameters --------------------------------------------------
-input_dir <- "Dienstreiseabrechnungen"
-#input_dir <- "Beispielabrechnungen"
+input_dir <- "Dienstreiseantraege"
 
-# Define name of output directory (beinggoting to be a subdirectory
-# of input_dir)
+# Define name of output directory (going to be a subdirectory of input_dir)
 output_text <- "Textausgaben"
 output_image <- "Bildschnipsel"
 output_analysis <- "Analyseergebnisse"
@@ -193,7 +191,8 @@ for(i in 1:number_of_pdfs){
   dir.create(output_text, showWarnings = FALSE)
   
   utils::write.table(x = text_from_png_short,
-                     file = paste(output_text, "/Dienstreise_", i,"_Textauszug_kurz.txt", sep = ""),
+                     file = paste(output_text, "/Dienstreise_", i,
+                                  "_Textauszug_kurz.txt", sep = ""),
                      sep = "", row.names = FALSE,
                      col.names = FALSE, quote = FALSE)
   
@@ -223,4 +222,6 @@ write.csv(x = df_results, file = paste(
 write.csv2(x = df_results, file = paste(
   output_analysis, "/textanalysis_de.csv", sep = ""), row.names = FALSE)
 
+# Set default working directory and clean environment
 setwd(old_wd)
+rm(list = ls())
